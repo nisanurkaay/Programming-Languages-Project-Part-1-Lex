@@ -1,0 +1,31 @@
+// Complex CHEF example program
+
+secret amount LIMIT = 5;
+
+recipe factorial(amount n) {
+    ingredient amount result = 1;
+    ingredient amount i = 1;
+
+    stir (i <= n) {
+        result = result * i;
+        i = i + 1;
+    }
+
+    serve(result);
+}
+
+ingredient amount number = 4;
+ingredient measure price = 9.99;
+ingredient flavor active = fresh;
+ingredient piece letter = 'A';
+ingredient label name = "ChefLanguage";
+
+/* Conditional block */
+heat (number > 0 && active == fresh) {
+    serve("Calculating factorial...");
+    factorial(number);
+} reheat (number == 0) {
+    serve("Number is zero");
+} burn {
+    serve("Invalid number");
+}

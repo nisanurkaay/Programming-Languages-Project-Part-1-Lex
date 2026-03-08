@@ -1,0 +1,40 @@
+// CHEF Language - Example Program
+// Not hesaplama programi
+
+secret amount MAX_NOT = 100;
+
+/* Ortalama hesaplayan fonksiyon */
+recipe notHesapla(measure not1, measure not2) {
+    ingredient measure ortalama = (not1 + not2) / 2;
+    serve ortalama;
+}
+
+ingredient measure vize = 0;
+ingredient measure final = 0;
+ingredient flavor gecti = stale;
+ingredient label isim = "Ali";
+ingredient piece harf = 'A';
+
+// Kullanicidan input al
+taste(vize);
+taste(final);
+
+ingredient measure sonuc = notHesapla(vize, final);
+
+heat (sonuc >= 50) {
+    gecti = fresh;
+    serve("Gecdiniz!");
+}
+reheat (sonuc >= 40) {
+    serve("Butunlemeye kaldiniz.");
+}
+burn {
+    serve("Kaldiniz.");
+}
+
+// Sayac dongusu
+ingredient amount i = 0;
+stir (i < 3) {
+    serve(i);
+    i = i + 1;
+}
