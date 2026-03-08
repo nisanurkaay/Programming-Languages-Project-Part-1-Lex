@@ -1,0 +1,103 @@
+// Example Program 3: Full CHEF language showcase
+
+/*
+   This example demonstrates most of the supported
+   constructs of the CHEF programming language.
+*/
+
+secret amount MAX_GUESTS = 12;
+secret measure TAX_RATE = 1.08;
+
+ingredient amount guestCount = 4;
+ingredient amount index = 0;
+ingredient amount totalPrice = 0;
+ingredient measure menuPrice = 24.50;
+ingredient flavor kitchenOpen = fresh;
+ingredient flavor vipCustomer = stale;
+ingredient label welcomeMessage = "Welcome to CHEF Restaurant";
+ingredient label mealName = "Pasta";
+ingredient piece grade = 'A';
+
+// Display initial message
+serve(welcomeMessage);
+
+// Function to calculate subtotal
+recipe calculateSubtotal(amount count, amount price) {
+    serve(count * price);
+}
+
+// Function to print meal information
+recipe printMealInfo(label name, measure price) {
+    serve(name);
+    serve(price);
+}
+
+// Function to check reservation status
+recipe checkReservation(amount people, flavor isOpen) {
+    heat (people < MAX_GUESTS && isOpen == fresh) {
+        serve("Reservation accepted");
+    } reheat (people == MAX_GUESTS) {
+        serve("Restaurant is full");
+    } burn {
+        serve("Reservation rejected");
+    }
+}
+
+// Show meal information
+printMealInfo(mealName, menuPrice);
+
+// Reservation check
+checkReservation(guestCount, kitchenOpen);
+
+// Calculate simple bill
+totalPrice = guestCount * 24 + 10;
+serve(totalPrice);
+
+// Loop through guests
+stir (index < guestCount) {
+    serve(index);
+    index = index + 1;
+}
+
+/* Discount and status checks */
+heat (guestCount > 2 && kitchenOpen == fresh) {
+    serve("Group discount may apply");
+} reheat (guestCount == 2 || vipCustomer == fresh) {
+    serve("Special service available");
+} burn {
+    serve("Standard service");
+}
+
+// Char and string usage
+serve(grade);
+serve(mealName);
+
+// Float comparison
+heat (menuPrice >= 20.00) {
+    serve("Premium menu");
+} burn {
+    serve("Standard menu");
+}
+
+// Input example
+taste(guestCount);
+
+// Boolean reassignment
+vipCustomer = fresh;
+
+// More logical checks
+heat (!stale && vipCustomer == fresh) {
+    serve("VIP customer confirmed");
+}
+
+// Nested-looking flow using separate conditions
+heat (guestCount != 0) {
+    serve("There are active guests");
+}
+
+heat (guestCount <= MAX_GUESTS) {
+    serve("Guest count is valid");
+}
+
+// Final message
+serve("Service completed");
